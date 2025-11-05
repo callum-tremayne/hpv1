@@ -12,8 +12,8 @@ const navItems = [
 
 export function Navbar() {
   return (
-    <header className="w-full">
-      <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-6 py-6">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-6 py-4">
         <Link
           href="/"
           className="text-lg font-semibold tracking-tight text-foreground"
