@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 import { Button } from "@/components/ui/button";
-import { UnicornBackground } from "@/components/sections/unicorn-background";
 
 const headlineCopy = "A Unique and Digital Way to Show You Care";
 
@@ -29,8 +28,11 @@ export function Hero() {
 
   return (
     <section className="relative w-full overflow-hidden">
-      <UnicornBackground />
-      <div className="relative mx-auto flex min-h-[100vh] w-full max-w-6xl flex-col items-start justify-end px-6 pb-20 pt-24">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/30"
+      />
+      <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col items-start justify-end px-6 pb-20 pt-8">
         <div className="space-y-6 text-left text-foreground">
           <span className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
             AI-driven gifting
@@ -56,8 +58,9 @@ export function Hero() {
             ))}
           </h1>
           <p className="max-w-2xl text-lg text-muted-foreground sm:text-xl">
-            Heartfelt Pages crafts bespoke microsites powered by AI so every message, photo,
-            and memory feels truly personal. Built for gifting special people in your life.
+            Heartfelt Pages crafts bespoke microsites powered by AI so every
+            message, photo, and memory feels truly personal. Built for gifting
+            special people in your life.
           </p>
           <Button size="lg" className="px-8">
             Try it out

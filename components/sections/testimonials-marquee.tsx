@@ -1,9 +1,3 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -45,21 +39,14 @@ const rowTwo: Testimonial[] = [
 function TestimonialCard({
   testimonial,
   ariaHidden = false,
-  cardRef,
 }: {
   testimonial: Testimonial;
   ariaHidden?: boolean;
-  cardRef?: (node: HTMLDivElement | null) => void;
 }) {
   return (
     <Card
       className="min-w-[240px] max-w-[240px] bg-card/90 backdrop-blur lg:min-w-[260px] lg:max-w-[260px]"
       aria-hidden={ariaHidden}
-      ref={(node) => {
-        if (!ariaHidden) {
-          cardRef?.(node);
-        }
-      }}
     >
       <CardContent className="flex flex-col gap-4 p-5">
         <div className="flex items-center gap-3">
@@ -88,11 +75,9 @@ function TestimonialCard({
 function MarqueeRow({
   testimonials,
   direction,
-  onCardRef,
 }: {
   testimonials: Testimonial[];
   direction: "left" | "right";
-  onCardRef?: (node: HTMLDivElement | null) => void;
 }) {
   return (
     <div className="relative w-full overflow-hidden">
@@ -100,18 +85,13 @@ function MarqueeRow({
         className={`marquee-track ${direction === "left" ? "marquee-left" : "marquee-right"}`}
       >
         {testimonials.map((testimonial) => (
-          <TestimonialCard
-            testimonial={testimonial}
-            key={testimonial.name}
-            cardRef={onCardRef}
-          />
+          <TestimonialCard testimonial={testimonial} key={testimonial.name} />
         ))}
         {testimonials.map((testimonial) => (
           <TestimonialCard
             testimonial={testimonial}
             key={`${testimonial.name}-duplicate`}
             ariaHidden
-            cardRef={onCardRef}
           />
         ))}
       </div>
@@ -120,50 +100,11 @@ function MarqueeRow({
 }
 
 export function TestimonialsMarquee() {
-  const cardsRef = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    if (!cardsRef.current.length) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set(cardsRef.current, { y: 120, opacity: 0 });
-      gsap.to(cardsRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 1.1,
-        ease: "power3.out",
-        stagger: 0.08,
-        scrollTrigger: {
-          trigger: "#testimonials-marquee",
-          start: "top 80%",
-          once: true,
-        },
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
-
-  cardsRef.current = [];
-
   return (
-    <section id="testimonials-marquee" className="w-full bg-transparent py-16">
+    <section className="w-full bg-transparent py-16">
       <div className="flex w-full flex-col gap-6 px-6">
-        <MarqueeRow
-          testimonials={rowOne}
-          direction="left"
-          onCardRef={(el) => {
-            if (el) cardsRef.current.push(el);
-          }}
-        />
-        <MarqueeRow
-          testimonials={rowTwo}
-          direction="right"
-          onCardRef={(el) => {
-            if (el) cardsRef.current.push(el);
-          }}
-        />
+        <MarqueeRow testimonials={rowOne} direction="left" />
+        <MarqueeRow testimonials={rowTwo} direction="right" />
       </div>
     </section>
   );
