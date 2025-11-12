@@ -1,23 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
 const steps = [
   {
-    title: "Tell Us About Them",
-    description:
-      "Share memories, inside jokes, and photos. Our AI highlights what matters most.",
+    title: "Customise Your Page",
+    description: "Enter your message, upload images, and choose a theme.",
     label: "Step 01",
   },
   {
-    title: "Curate the Experience",
+    title: "Choose Your Components",
     description:
-      "Pick a layout, add interactive chapters, and tailor colors to their vibe.",
+      "Make it more special by adding components such as, a countdown or a song that means something",
     label: "Step 02",
   },
   {
-    title: "Schedule the Reveal",
-    description:
-      "Send instantly or time the delivery for birthdays, anniversaries, and surprise parties.",
+    title: "Share with a Unique Link",
+    description: "Send your custom page to yourself or a loved one.",
     label: "Step 03",
   },
 ];
@@ -35,15 +34,16 @@ export function FlowSection() {
               How it works
             </p>
             <h2 className="text-4xl font-semibold tracking-tight">
-              Capture their story in three guided steps
+              Create a heartfelt page in just three simple steps{" "}
             </h2>
             <p className="text-lg text-muted-foreground">
-              Every prompt is built with behavioral science to surface meaningful memories,
-              so your final page feels deeply personal.
+              Designing something meaningful has never been easier. Personalise
+              your page, add thoughtful touches, and share a lasting memory—all
+              within minutes.
             </p>
           </div>
           <Button size="lg" variant="secondary">
-            See Template Library
+            <Link href="">See Examples</Link>
           </Button>
         </div>
         <div className="grid gap-6 md:grid-cols-3">

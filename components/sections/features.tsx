@@ -1,8 +1,7 @@
-import { HeartHandshake, Share2, Sparkles, Wand2 } from "lucide-react";
+import { Heart, Image, Link2, Palette } from "lucide-react";
 
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -10,28 +9,28 @@ import {
 
 const features = [
   {
-    title: "Guided Storytelling",
+    title: "Personal Touch",
     description:
-      "Answer a few heartfelt prompts and our AI shapes them into a captivating narrative.",
-    icon: Sparkles,
+      "Add your own words, photos, and memories to create a page that feels one-of-a-kind.",
+    icon: Heart,
   },
   {
-    title: "Cinematic Layouts",
+    title: "Beautiful Themes",
     description:
-      "Handpicked templates feel tactile and premium on every device—no design skills needed.",
-    icon: Wand2,
+      "Choose from curated designs that perfectly match the occasion—like Valentine’s Day, birthdays, or anniversaries.",
+    icon: Palette,
   },
   {
-    title: "Shared Moments",
+    title: "Photo Memories",
     description:
-      "Invite loved ones to add memories, music, or video messages in real time.",
-    icon: Share2,
+      "Upload your favorite moments together, complete with captions, dates, and special locations.",
+    icon: Image,
   },
   {
-    title: "Keepsake Delivery",
+    title: "Share Instantly",
     description:
-      "Send as a secure microsite, printable booklet, or timed reveal for special dates.",
-    icon: HeartHandshake,
+      "Once complete, share your unique link with someone special—no app or download required.",
+    icon: Link2,
   },
 ];
 
@@ -47,11 +46,11 @@ export function FeaturesSection() {
             Features
           </p>
           <h2 className="text-4xl font-semibold tracking-tight">
-            Everything needed to craft a digital love letter
+            Everything you need to create something meaningful
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Heartfelt Pages combines guided storytelling with elegant UI blocks so your gift
-            feels hand-made and high tech all at once.
+            Heartfelt Pages makes it easy to design and share a personalised
+            digital gift—crafted with love, and made to last.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

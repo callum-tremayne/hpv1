@@ -2,7 +2,7 @@ import { FinalCTASection } from "@/components/sections/cta";
 import { FeaturesSection } from "@/components/sections/features";
 import { FlowSection } from "@/components/sections/flow";
 import { Hero } from "@/components/sections/hero";
-import { TestimonialsMarquee } from "@/components/sections/testimonials-marquee";
+import { Pricing } from "@/components/sections/pricing";
 import { Navbar } from "@/components/site/navbar";
 
 export default function Home() {
@@ -11,9 +11,9 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <TestimonialsMarquee />
         <FeaturesSection />
         <FlowSection />
+        <Pricing />
         <FinalCTASection />
       </main>
     </div>

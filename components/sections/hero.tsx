@@ -1,71 +1,46 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { FilePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const headlineCopy = "A Unique and Digital Way to Show You Care";
-
 export function Hero() {
-  const characterRefs = useRef<HTMLSpanElement[]>([]);
-
-  useEffect(() => {
-    if (!characterRefs.current.length) return;
-    gsap.set(characterRefs.current, { yPercent: 120, opacity: 0 });
-    gsap.to(characterRefs.current, {
-      yPercent: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: "power3.out",
-      stagger: 0.04,
-    });
-  }, []);
-
-  const words = headlineCopy.split(" ");
-
-  characterRefs.current = [];
-
   return (
-    <section className="relative w-full overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/30"
-      />
-      <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col items-start justify-end px-6 pb-20 pt-8">
-        <div className="space-y-6 text-left text-foreground">
-          <span className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
-            AI-driven gifting
-          </span>
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight drop-shadow-sm sm:text-5xl md:text-6xl lg:text-7xl">
-            {words.map((word, wordIndex) => (
-              <div
-                key={`${word}-${wordIndex}`}
-                className="inline-flex overflow-hidden pr-3 last:pr-0 align-baseline"
-              >
-                {word.split("").map((char, charIndex) => (
-                  <span
-                    key={`${wordIndex}-${charIndex}`}
-                    ref={(el) => {
-                      if (el) characterRefs.current.push(el);
-                    }}
-                    className="inline-block will-change-transform"
-                  >
-                    {char}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </h1>
-          <p className="max-w-2xl text-lg text-muted-foreground sm:text-xl">
-            Heartfelt Pages crafts bespoke microsites powered by AI so every
-            message, photo, and memory feels truly personal. Built for gifting
-            special people in your life.
+    <section className="relative bg-linear-to-b from-background via-background to-background/90">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="mx-auto h-72 w-72 rounded-full bg-primary/20 blur-3xl md:w-md" />
+      </div>
+      <div className="relative mx-auto flex w-full max-w-3xl flex-col gap-10 px-4 py-20 text-center sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="space-y-6"
+        >
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+            Heartfelt Pages{" "}
           </p>
-          <Button size="lg" className="px-8">
-            Try it out
+          <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            A Unique & Digital Way to Show You Care
+          </h1>
+          <p className="mx-auto max-w-2xl text-base text-muted-foreground sm:text-xl">
+            Create a personalised webpage as a heartfelt gift for any occasion.
+          </p>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
+          <Button size="lg" data-cta="create-hero" className="w-full sm:w-auto">
+            <Link href="" className="flex items-center gap-2">
+              <FilePlus className="h-5 w-5" aria-hidden="true" />
+              Create Your Page
+            </Link>
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
