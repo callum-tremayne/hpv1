@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Table,
   TableBody,
@@ -209,7 +208,7 @@ export default function AdminPage() {
                 />
               </CardHeader>
               <CardContent className="px-0">
-                <ScrollArea className="w-full">
+                <div className="w-full overflow-x-auto">
                   <div className="min-w-[720px] px-6">
                     <Table>
                       <TableHeader>
@@ -259,7 +258,7 @@ export default function AdminPage() {
                       </TableBody>
                     </Table>
                   </div>
-                </ScrollArea>
+                </div>
               </CardContent>
             </Card>
           </div>

@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   CalendarHeart,
   Clock,
@@ -198,7 +197,7 @@ export default function DashboardPage() {
             </div>
           </CardHeader>
           <CardContent className="px-0">
-            <ScrollArea className="w-full">
+            <div className="w-full overflow-x-auto">
               <div className="min-w-[860px] px-6">
                 <Table>
                   <TableHeader>
@@ -239,31 +238,23 @@ export default function DashboardPage() {
                             </Button>
                           </div>
                         </TableCell>
-                        <TableCell>
-                          <div className="flex flex-wrap justify-end gap-2">
-                            <Button variant="outline" size="sm">
-                              View
-                            </Button>
-                            <Button variant="outline" size="sm">
-                              Edit
-                            </Button>
-                            <Button variant="outline" size="sm">
-                              Share
-                            </Button>
-                            <Button variant="ghost" size="icon">
-                              <MoreHorizontal
-                                className="h-4 w-4"
-                                aria-hidden="true"
-                              />
-                            </Button>
-                          </div>
+                        <TableCell className="flex justify-end gap-2">
+                          <Button variant="outline" size="sm">
+                            View
+                          </Button>
+                          <Button variant="ghost" size="icon">
+                            <MoreHorizontal
+                              className="h-4 w-4"
+                              aria-hidden="true"
+                            />
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </div>
-            </ScrollArea>
+            </div>
           </CardContent>
         </Card>
 
@@ -312,48 +303,6 @@ export default function DashboardPage() {
                   Unlock theme swaps, video embeds, and faster edits.
                 </p>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Billing & receipts</CardTitle>
-            <CardDescription>
-              Download receipts for your purchases.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="px-0">
-            <div className="min-w-full px-6">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Receipt ID</TableHead>
-                    <TableHead>Item</TableHead>
-                    <TableHead>Amount</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead className="text-right">Action</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {receipts.map((receipt) => (
-                    <TableRow key={receipt.id}>
-                      <TableCell className="font-medium">
-                        {receipt.id}
-                      </TableCell>
-                      <TableCell>{receipt.item}</TableCell>
-                      <TableCell>{receipt.amount}</TableCell>
-                      <TableCell>{receipt.date}</TableCell>
-                      <TableCell className="text-right">
-                        <Button variant="outline" size="sm" className="gap-2">
-                          <Download className="h-4 w-4" />
-                          Download
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
             </div>
           </CardContent>
         </Card>
