@@ -112,11 +112,11 @@ export function Pricing() {
             Pricing
           </p>
           <h2 className="text-4xl font-semibold tracking-tight">
-            Choose a plan that matches the moment{" "}
+            Choose a plan that matches the moment
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Start for free, unlock premium components when you're ready, or chat
-            to us for a fully bespoke build.
+            Start for free, unlock premium components when you&apos;re ready, or
+            chat to us for a fully bespoke build.
           </p>
         </div>
 
