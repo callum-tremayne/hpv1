@@ -31,7 +31,7 @@ export function Hero() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
-          <Link href="">
+          <Link href="/create">
             <Button
               size="lg"
               data-cta="create-hero"

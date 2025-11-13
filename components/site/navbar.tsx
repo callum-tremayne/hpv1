@@ -30,7 +30,7 @@ export function Navbar() {
           Examples
         </Button>
       </Link>
-      <Link href="">
+      <Link href="/create">
         <Button data-cta="get-started" className="cursor-pointer">
           Get Started
         </Button>
