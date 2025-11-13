@@ -50,7 +50,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b border-white/20 backdrop-blur bg-transparent",
+        "sticky top-0 z-50 backdrop-blur bg-transparent",
         scrolled ? "shadow-sm" : ""
       )}
       aria-label="Primary"
