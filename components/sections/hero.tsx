@@ -18,9 +18,6 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Heartfelt Pages{" "}
-          </p>
           <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             A Unique & Digital Way to Show You Care
           </h1>
@@ -34,12 +31,16 @@ export function Hero() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
-          <Button size="lg" data-cta="create-hero" className="w-full sm:w-auto">
-            <Link href="" className="flex items-center gap-2">
+          <Link href="">
+            <Button
+              size="lg"
+              data-cta="create-hero"
+              className="w-full sm:w-auto cursor-pointer flex items-center gap-2"
+            >
               <FilePlus className="h-5 w-5" aria-hidden="true" />
               Create Your Page
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>

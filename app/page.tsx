@@ -4,6 +4,7 @@ import { FlowSection } from "@/components/sections/flow";
 import { Hero } from "@/components/sections/hero";
 import { Pricing } from "@/components/sections/pricing";
 import { Navbar } from "@/components/site/navbar";
+import { Footer } from "@/components/site/footer";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <FlowSection />
         <Pricing />
         <FinalCTASection />
+        <Footer />
       </main>
     </div>
   );

@@ -34,7 +34,7 @@ export function FlowSection() {
               How it works
             </p>
             <h2 className="text-4xl font-semibold tracking-tight">
-              Create a heartfelt page in just three simple steps{" "}
+              Create a heartfelt page in just three simple steps
             </h2>
             <p className="text-lg text-muted-foreground">
               Designing something meaningful has never been easier. Personalise
@@ -42,9 +42,11 @@ export function FlowSection() {
               within minutes.
             </p>
           </div>
-          <Button size="lg" variant="secondary">
-            <Link href="">See Examples</Link>
-          </Button>
+          <Link href="">
+            <Button size="lg" variant="secondary" className="cursor-pointer">
+              See Examples
+            </Button>
+          </Link>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {steps.map((step) => (

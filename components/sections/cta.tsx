@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function FinalCTASection() {
   return (
@@ -8,7 +9,7 @@ export function FinalCTASection() {
     >
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 px-6 text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-background/70">
-          Make Someone's Day
+          Make Someone&apos;s Day
         </p>
         <h2 className="text-4xl font-semibold tracking-tight">
           Create a meaningful gift in just a few minutes.
@@ -17,19 +18,23 @@ export function FinalCTASection() {
           Want some inspiration? Check out some examples on our Examples Page.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button
-            size="lg"
-            className="bg-background text-foreground hover:bg-background/90"
-          >
-            Get Started
-          </Button>
-          <Button
-            size="lg"
-            variant="secondary"
-            className="bg-transparent text-background hover:bg-background/10"
-          >
-            Examples
-          </Button>
+          <Link href="">
+            <Button
+              size="lg"
+              className="bg-background cursor-pointer text-foreground hover:bg-background/90"
+            >
+              Get Started
+            </Button>
+          </Link>
+          <Link href="">
+            <Button
+              size="lg"
+              variant="outline"
+              className="bg-transparent cursor-pointer text-background hover:bg-background/10"
+            >
+              Examples
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

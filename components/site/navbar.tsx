@@ -7,6 +7,7 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,15 +21,29 @@ export function Navbar() {
 
   const ctaButtons = (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
-      <Button data-cta="examples" variant="ghost">
-        <Link href="">Examples</Link>
-      </Button>
-      <Button data-cta="get-started">
-        <Link href="">Get Started</Link>
-      </Button>
-      <Button variant="secondary" data-cta="signin-header">
-        <Link href="/login">Sign in</Link>
-      </Button>
+      <Link href="">
+        <Button
+          data-cta="examples"
+          variant="outline"
+          className="cursor-pointer"
+        >
+          Examples
+        </Button>
+      </Link>
+      <Link href="">
+        <Button data-cta="get-started" className="cursor-pointer">
+          Get Started
+        </Button>
+      </Link>
+      <Link href="/login">
+        <Button
+          variant="secondary"
+          data-cta="signin-header"
+          className="cursor-pointer"
+        >
+          Sign in
+        </Button>
+      </Link>
     </div>
   );
 
@@ -41,11 +56,18 @@ export function Navbar() {
       aria-label="Primary"
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="text-lg font-semibold tracking-tight text-foreground"
-        >
-          heartfelt<span className="text-primary">pages</span>
+        <Link href="/" className="inline-flex flex-row gap-3 text-foreground">
+          <Image
+            src="/logo.svg"
+            alt="Heartfelt Pages logo"
+            width={140}
+            height={140}
+            priority
+            className="h-8 w-auto"
+          />
+          <span className="text-lg font-semibold tracking-tight">
+            heartfelt<span className="text-primary">pages</span>
+          </span>
         </Link>
         <div className="hidden md:flex">{ctaButtons}</div>
         <div className="md:hidden">

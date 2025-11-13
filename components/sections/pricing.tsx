@@ -1,7 +1,3 @@
-/**
- * Pricing section rebuilt with shadcn/ui cards, framer-motion reveals,
- * and a new Custom tier for bespoke requests.
- */
 "use client";
 
 import Link from "next/link";
@@ -51,7 +47,7 @@ const tiers: Tier[] = [
       "Upload up to 6 images plus 1 embedded song",
       "Reasons why + handwritten note sections",
       "Live special-date countdown",
-      "Shareable heartfelt-pages.com link",
+      "Shareable heartfeltpages.co.uk link",
     ],
     href: "/create-your-page/wizard?plan=basic",
     cta: "Start for free",
@@ -71,7 +67,7 @@ const tiers: Tier[] = [
       "Unlimited photos & extra photo sections",
       "Premium themes, fonts, and bespoke components",
       "Up to 10 “reasons why” entries",
-      "Custom URL (heartfelt-pages.com/yourname)",
+      "Custom URL (heartfeltpages.co.uk/yourname)",
       "Forever hosting + updates",
     ],
     href: "/create-your-page/wizard?plan=premium",
@@ -92,7 +88,7 @@ const tiers: Tier[] = [
       "Custom domains, analytics, and hosting needs",
       "Priority launch support and revisions",
     ],
-    href: "mailto:hello@heartfelt-pages.com?subject=Custom%20Heartfelt%20Page%20Request",
+    href: "mailto:hello@heartfeltpages.co.uk?subject=Custom%20Heartfelt%20Page%20Request",
     cta: "Contact us",
   },
 ];
@@ -187,16 +183,18 @@ export function Pricing() {
                     ))}
                   </ul>
 
-                  <Button
-                    className={cn(
-                      "w-full text-center",
-                      tier.highlight ? "" : "border border-border"
-                    )}
-                    variant={tier.highlight ? "default" : "ghost"}
-                    data-cta={`pricing-${tier.id}`}
-                  >
-                    <Link href={tier.href}>{tier.cta}</Link>
-                  </Button>
+                  <Link href={tier.href}>
+                    <Button
+                      className={cn(
+                        "w-full text-center cursor-pointer",
+                        tier.highlight ? "" : "border border-border"
+                      )}
+                      variant={tier.highlight ? "default" : "ghost"}
+                      data-cta={`pricing-${tier.id}`}
+                    >
+                      {tier.cta}
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </motion.div>
