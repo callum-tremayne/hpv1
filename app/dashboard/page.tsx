@@ -22,7 +22,6 @@ import {
   CalendarHeart,
   Clock,
   Copy,
-  Download,
   Edit3,
   FileText,
   HelpCircle,
@@ -39,13 +38,6 @@ type PageItem = {
   status: "Active" | "Draft" | "Expired" | "Pending";
   createdAt: string;
   shareUrl: string;
-};
-
-type ReceiptItem = {
-  id: string;
-  item: string;
-  amount: string;
-  date: string;
 };
 
 const pages: PageItem[] = [
@@ -80,27 +72,6 @@ const pages: PageItem[] = [
     status: "Expired",
     createdAt: "18 Sep 2025",
     shareUrl: "https://heartfelt.pages/grandad-stories",
-  },
-];
-
-const receipts: ReceiptItem[] = [
-  {
-    id: "RCT-2083",
-    item: "Mother's Day Page – Premium",
-    amount: "£20",
-    date: "12 Nov 2025",
-  },
-  {
-    id: "RCT-2071",
-    item: "Anniversary Edit Credit",
-    amount: "£8",
-    date: "29 Oct 2025",
-  },
-  {
-    id: "RCT-2038",
-    item: "Lifetime Page – Basic",
-    amount: "£10",
-    date: "14 Sep 2025",
   },
 ];
 

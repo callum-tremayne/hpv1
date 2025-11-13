@@ -4,8 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, PenSquare, Sparkles, Wand2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-
-import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -108,14 +106,19 @@ export function Pricing() {
       id="pricing"
       className="w-full border-t border-border/40 bg-gradient-to-b from-background via-background to-background/80 py-24"
     >
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6">
-        <SectionHeading
-          eyebrow="Pricing"
-          align="center"
-          className="mx-auto max-w-3xl text-center"
-          title="Choose a plan that matches the moment"
-          description="Start for free, unlock premium components when you’re ready, or chat to us for a fully bespoke build."
-        />
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 text-center">
+        <div className="space-y-4">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+            Pricing
+          </p>
+          <h2 className="text-4xl font-semibold tracking-tight">
+            Choose a plan that matches the moment{" "}
+          </h2>
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            Start for free, unlock premium components when you're ready, or chat
+            to us for a fully bespoke build.
+          </p>
+        </div>
 
         <motion.div
           initial="hidden"
@@ -128,7 +131,7 @@ export function Pricing() {
               key={tier.id}
               custom={index}
               variants={cardVariants}
-              className="flex h-full"
+              className="flex h-full text-left"
             >
               <Card
                 className={cn(

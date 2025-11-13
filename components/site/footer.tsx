@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeartHandshake, Mail, Sparkles, Instagram } from "lucide-react";
-import { FaTiktok, FaXTwitter } from "react-icons/fa6";
+import { FaFacebook, FaTiktok, FaXTwitter } from "react-icons/fa6";
 import type { ComponentType } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -50,6 +50,11 @@ const footerLinks: FooterLinkGroup[] = [
 ];
 
 const socialLinks: SocialLink[] = [
+  {
+    label: "Facebook",
+    href: "https://facebook.com/heartfeltpages.co.uk",
+    icon: FaFacebook,
+  },
   {
     label: "Instagram",
     href: "https://instagram.com/heartfeltpages.co.uk",

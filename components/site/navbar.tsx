@@ -35,7 +35,7 @@ export function Navbar() {
           Get Started
         </Button>
       </Link>
-      <Link href="/login">
+      <Link href="/sign-in">
         <Button
           variant="secondary"
           data-cta="signin-header"
