@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState, type ReactNode } from "react";
-import Link from "next/link";
 
 import { Navbar } from "@/components/site/navbar";
 import {
@@ -23,13 +22,10 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { Progress } from "@/components/ui/progress";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -282,33 +278,38 @@ export default function CreatePage() {
               the right.
             </p>
           </div>
-          <div className="lg:hidden sticky top-4 z-40">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button className="w-full gap-2" variant="outline">
-                  <Eye className="h-4 w-4" />
-                  Live preview
-                </Button>
-              </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="w-full overflow-y-auto sm:max-w-md"
-              >
-                <SheetHeader className="text-left">
-                  <SheetTitle>Live preview</SheetTitle>
-                  <SheetDescription>
-                    Swipe through the preview without leaving the form.
-                  </SheetDescription>
-                </SheetHeader>
-                <div className="mt-4">
-                  <PreviewPanel
-                    {...previewProps}
-                    className="border border-border/60 shadow-none"
-                    scrollAreaClassName="h-[65vh]"
-                  />
-                </div>
-              </SheetContent>
-            </Sheet>
+          <div className="lg:hidden">
+            <div className="flex justify-end pr-2">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    className="w-1/2 min-w-[160px] justify-center gap-2"
+                    variant="outline"
+                  >
+                    <Eye className="h-4 w-4" />
+                    Live preview
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side="right"
+                  className="w-full overflow-y-auto sm:max-w-md"
+                >
+                  <SheetHeader className="text-left">
+                    <SheetTitle>Live preview</SheetTitle>
+                    <SheetDescription>
+                      Swipe through the preview without leaving the form.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="mt-4">
+                    <PreviewPanel
+                      {...previewProps}
+                      className="border border-border/60 shadow-none"
+                      scrollAreaClassName="h-[65vh]"
+                    />
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </header>
 
@@ -758,7 +759,6 @@ function PreviewPanel({
   photosOfUs,
   photosOfYou,
   previewLink,
-  completion,
   scrollAreaClassName = "h-[600px]",
   className,
 }: PreviewPanelProps) {
@@ -779,310 +779,224 @@ function PreviewPanel({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="preview" className="space-y-4">
-          <TabsList className="w-full">
-            <TabsTrigger value="preview" className="flex-1">
-              Page view
-            </TabsTrigger>
-            <TabsTrigger value="share" className="flex-1">
-              Share & status
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview">
-            <ScrollArea
-              className={cn(
-                "rounded-2xl border border-border/60 p-6",
-                scrollAreaClassName
-              )}
-            >
-              <div className="space-y-6">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <Badge className="bg-background/60 text-sm font-semibold text-foreground">
-                    {form.occasion}
-                  </Badge>
-                  <div className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Accent strength {form.accentIntensity}%
-                  </div>
-                </div>
-                {form.showHero && (
-                  <section
-                    className="space-y-3 rounded-2xl bg-background/80 p-6 shadow-sm"
-                    style={{ border: `1px solid ${accentBorder}` }}
-                  >
-                    {form.recipientName && (
-                      <p
-                        className="text-sm uppercase tracking-[0.2em]"
-                        style={{ color: accentBorder }}
-                      >
-                        For {form.recipientName}
-                      </p>
-                    )}
-                    <h2 className="text-3xl font-semibold">{form.title}</h2>
-                    <p className="text-muted-foreground">{form.message}</p>
-                  </section>
-                )}
-
-                {form.showSpecialDate && (
-                  <section className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm font-medium">
-                      <Calendar
-                        className="h-4 w-4"
-                        style={{ color: accentBorder }}
-                      />
-                      {form.specialDateTitle}
-                    </div>
-                    <div
-                      className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold"
-                      style={{
-                        backgroundColor: accentBackground,
-                        color: "#0f0f0f",
-                      }}
-                    >
-                      <Heart className="h-4 w-4" />
-                      {new Date(form.specialDate).toLocaleDateString(
-                        undefined,
-                        {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        }
-                      )}
-                    </div>
-                  </section>
-                )}
-
-                {form.showSong && (
-                  <section className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm font-semibold">
-                      <Music2
-                        className="h-4 w-4"
-                        style={{ color: accentBorder }}
-                      />
-                      Our soundtrack
-                    </div>
-                    <div
-                      className="space-y-3 rounded-2xl border bg-card/30 p-4"
-                      style={{ borderColor: accentBorder }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="flex h-12 w-12 items-center justify-center rounded-full text-white"
-                          style={{ backgroundColor: accentBorder }}
-                        >
-                          <Music2 className="h-5 w-5" />
-                        </div>
-                        <div className="space-y-1">
-                          <p className="text-sm font-medium text-foreground">
-                            Shared melody
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            {form.youtubeLink}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="h-2 rounded-full bg-muted">
-                          <div
-                            className="h-2 rounded-full"
-                            style={{
-                              width: "65%",
-                              backgroundColor: accentBorder,
-                            }}
-                          />
-                        </div>
-                        <div className="flex items-center justify-between text-xs text-muted-foreground">
-                          <span>0:38</span>
-                          <span>2:41</span>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                )}
-
-                {form.showReasons && (
-                  <section className="space-y-3">
-                    <div
-                      className="inline-flex items-center gap-2 rounded-full px-4 py-1 text-sm font-semibold"
-                      style={{ backgroundImage: accentUnderline }}
-                    >
-                      <Sparkles className="h-4 w-4" />
-                      {form.reasonsTitle}
-                    </div>
-                    <ul className="space-y-3">
-                      {reasonList.map((reason, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <div
-                            className="mt-1 h-2 w-2 rounded-full"
-                            style={{ backgroundColor: accentBorder }}
-                          />
-                          <p className="text-sm text-muted-foreground">
-                            {reason}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                )}
-
-                {form.showHandwritten && (
-                  <section
-                    className="space-y-3 rounded-2xl bg-background/80 p-6 shadow-sm"
-                    style={{ border: `1px dashed ${accentBorder}` }}
-                  >
-                    <div className="flex items-center gap-2 text-sm font-medium">
-                      <Feather className="h-4 w-4" />
-                      {form.handwrittenTitle}
-                    </div>
-                    <p className="text-lg italic leading-relaxed text-muted-foreground">
-                      “{form.handwrittenMessage}”
-                    </p>
-                  </section>
-                )}
-
-                {form.showPhotosOfUs && photosOfUs.length > 0 && (
-                  <section className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm font-semibold">
-                      <ImageIcon
-                        className="h-4 w-4"
-                        style={{ color: accentBorder }}
-                      />
-                      Photos of us
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-                      {photosOfUs.map((src, index) => (
-                        <div
-                          key={src + index}
-                          className="overflow-hidden rounded-xl bg-muted"
-                          style={{ border: `1px solid rgba(15,15,15,0.05)` }}
-                        >
-                          <img
-                            src={src}
-                            alt={`Us ${index + 1}`}
-                            className="h-32 w-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                )}
-
-                {form.showPhotosOfYou && photosOfYou.length > 0 && (
-                  <section className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm font-semibold">
-                      <GalleryHorizontalEnd
-                        className="h-4 w-4"
-                        style={{ color: accentBorder }}
-                      />
-                      Photos of you
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      {photosOfYou.map((src, index) => (
-                        <div
-                          key={src + index}
-                          className="overflow-hidden rounded-xl"
-                        >
-                          <img
-                            src={src}
-                            alt={`You ${index + 1}`}
-                            className="h-32 w-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                )}
-
-                <section className="space-y-3 rounded-2xl border border-dashed border-border/60 p-4">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <Badge
-                      variant="secondary"
-                      className="gap-1 text-foreground"
-                    >
-                      <Share2 className="h-3.5 w-3.5" />
-                      Share ready
-                    </Badge>
-                    <span className="text-sm text-muted-foreground">
-                      {previewLink}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Button variant="outline" className="gap-2">
-                      <Copy className="h-4 w-4" />
-                      Copy link
-                    </Button>
-                    <Button variant="ghost" className="gap-2">
-                      <Eye className="h-4 w-4" />
-                      Preview full page
-                    </Button>
-                  </div>
-                </section>
-              </div>
-            </ScrollArea>
-          </TabsContent>
-          <TabsContent value="share">
-            <div className="space-y-4 rounded-2xl border border-border/60 p-6">
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-muted-foreground">
-                  Page completeness
-                </p>
-                <Progress value={completion} />
-                <p className="text-sm text-muted-foreground">
-                  {completion}% of your sections are enabled. Toggle more blocks
-                  to enrich the experience.
-                </p>
-              </div>
-              <Separator />
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">
-                    Active sections
-                  </span>
-                  <span className="font-semibold">
-                    {
-                      [
-                        form.showHero,
-                        form.showSpecialDate,
-                        form.showSong,
-                        form.showReasons,
-                        form.showHandwritten,
-                        form.showPhotosOfUs,
-                        form.showPhotosOfYou,
-                      ].filter(Boolean).length
-                    }
-                    /7
-                  </span>
-                </div>
-                <div className="space-y-2 text-sm">
-                  <p className="font-medium text-foreground">Share link</p>
-                  <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" className="gap-2">
-                      <Share2 className="h-4 w-4" />
-                      Copy link
-                    </Button>
-                    <Button variant="outline" className="gap-2">
-                      <Wand2 className="h-4 w-4" />
-                      Generate QR
-                    </Button>
-                  </div>
-                </div>
-                <Separator />
-                <div className="space-y-3 text-sm text-muted-foreground">
-                  <p>
-                    Need inspo? Visit our{" "}
-                    <Link href="/" className="text-primary underline">
-                      example gallery
-                    </Link>{" "}
-                    for layout ideas.
-                  </p>
-                  <p>
-                    Switch the accent slider to fine-tune how bold or subtle
-                    each divider looks.
-                  </p>
-                </div>
+        <ScrollArea
+          className={cn(
+            "h-full rounded-2xl border border-border/60 p-6",
+            scrollAreaClassName
+          )}
+        >
+          <div className="space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <Badge className="bg-background/60 text-sm font-semibold text-foreground">
+                {form.occasion}
+              </Badge>
+              <div className="text-xs uppercase tracking-wide text-muted-foreground">
+                Accent strength {form.accentIntensity}%
               </div>
             </div>
-          </TabsContent>
-        </Tabs>
+            {form.showHero && (
+              <section
+                className="space-y-3 rounded-2xl bg-background/80 p-6 shadow-sm"
+                style={{ border: `1px solid ${accentBorder}` }}
+              >
+                {form.recipientName && (
+                  <p
+                    className="text-sm uppercase tracking-[0.2em]"
+                    style={{ color: accentBorder }}
+                  >
+                    For {form.recipientName}
+                  </p>
+                )}
+                <h2 className="text-3xl font-semibold">{form.title}</h2>
+                <p className="text-muted-foreground">{form.message}</p>
+              </section>
+            )}
+
+            {form.showSpecialDate && (
+              <section className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-medium">
+                  <Calendar
+                    className="h-4 w-4"
+                    style={{ color: accentBorder }}
+                  />
+                  {form.specialDateTitle}
+                </div>
+                <div
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold"
+                  style={{
+                    backgroundColor: accentBackground,
+                    color: "#0f0f0f",
+                  }}
+                >
+                  <Heart className="h-4 w-4" />
+                  {new Date(form.specialDate).toLocaleDateString(undefined, {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </div>
+              </section>
+            )}
+
+            {form.showSong && (
+              <section className="space-y-2">
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <Music2 className="h-4 w-4" style={{ color: accentBorder }} />
+                  Our soundtrack
+                </div>
+                <div
+                  className="space-y-3 rounded-2xl border bg-card/30 p-4"
+                  style={{ borderColor: accentBorder }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-full text-white"
+                      style={{ backgroundColor: accentBorder }}
+                    >
+                      <Music2 className="h-5 w-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium text-foreground">
+                        Shared melody
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {form.youtubeLink}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-2 rounded-full bg-muted">
+                      <div
+                        className="h-2 rounded-full"
+                        style={{
+                          width: "65%",
+                          backgroundColor: accentBorder,
+                        }}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span>0:38</span>
+                      <span>2:41</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {form.showReasons && (
+              <section className="space-y-3">
+                <div
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-1 text-sm font-semibold"
+                  style={{ backgroundImage: accentUnderline }}
+                >
+                  <Sparkles className="h-4 w-4" />
+                  {form.reasonsTitle}
+                </div>
+                <ul className="space-y-3">
+                  {reasonList.map((reason, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div
+                        className="mt-1 h-2 w-2 rounded-full"
+                        style={{ backgroundColor: accentBorder }}
+                      />
+                      <p className="text-sm text-muted-foreground">{reason}</p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {form.showHandwritten && (
+              <section
+                className="space-y-3 rounded-2xl bg-background/80 p-6 shadow-sm"
+                style={{ border: `1px dashed ${accentBorder}` }}
+              >
+                <div className="flex items-center gap-2 text-sm font-medium">
+                  <Feather className="h-4 w-4" />
+                  {form.handwrittenTitle}
+                </div>
+                <p className="text-lg italic leading-relaxed text-muted-foreground">
+                  “{form.handwrittenMessage}”
+                </p>
+              </section>
+            )}
+
+            {form.showPhotosOfUs && photosOfUs.length > 0 && (
+              <section className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <ImageIcon
+                    className="h-4 w-4"
+                    style={{ color: accentBorder }}
+                  />
+                  Photos of us
+                </div>
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+                  {photosOfUs.map((src, index) => (
+                    <div
+                      key={src + index}
+                      className="overflow-hidden rounded-xl bg-muted"
+                      style={{ border: `1px solid rgba(15,15,15,0.05)` }}
+                    >
+                      <img
+                        src={src}
+                        alt={`Us ${index + 1}`}
+                        className="h-32 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {form.showPhotosOfYou && photosOfYou.length > 0 && (
+              <section className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <GalleryHorizontalEnd
+                    className="h-4 w-4"
+                    style={{ color: accentBorder }}
+                  />
+                  Photos of you
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {photosOfYou.map((src, index) => (
+                    <div
+                      key={src + index}
+                      className="overflow-hidden rounded-xl"
+                    >
+                      <img
+                        src={src}
+                        alt={`You ${index + 1}`}
+                        className="h-32 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <section className="space-y-3 rounded-2xl border border-dashed border-border/60 p-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <Badge variant="secondary" className="gap-1 text-foreground">
+                  <Share2 className="h-3.5 w-3.5" />
+                  Share ready
+                </Badge>
+                <span className="text-sm text-muted-foreground">
+                  {previewLink}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="outline" className="gap-2">
+                  <Copy className="h-4 w-4" />
+                  Copy link
+                </Button>
+                <Button variant="ghost" className="gap-2">
+                  <Eye className="h-4 w-4" />
+                  Preview full page
+                </Button>
+              </div>
+            </section>
+          </div>
+        </ScrollArea>
       </CardContent>
     </Card>
   );
