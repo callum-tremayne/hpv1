@@ -76,7 +76,6 @@ type FormState = {
   accentIntensity: number;
   title: string;
   message: string;
-  recipientName: string;
   showHero: boolean;
   specialDateTitle: string;
   specialDate: string;
@@ -129,7 +128,6 @@ const createDefaultState = (): FormState => ({
   title: "For someone truly special",
   message:
     "From the first moment we met, you’ve filled my life with colour, warmth, and the kind of laughter that makes everything feel lighter. This page is a little corner of the internet dedicated to all the ways you make the world better just by being you.",
-  recipientName: "Izzy",
   showHero: true,
   specialDateTitle: "How long I’ve loved you",
   specialDate: "13th November 2025",
@@ -442,20 +440,36 @@ export default function CreatePage() {
                     }
                   />
                 </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="recipient-name">Recipient (optional)</Label>
-                  <Input
-                    id="recipient-name"
-                    placeholder="For Mum, For Noah..."
-                    value={form.recipientName}
-                    onChange={(event) =>
-                      updateField("recipientName", event.target.value)
-                    }
-                  />
-                  <p className="text-sm text-muted-foreground">
-                    Appears as a small dedication above the hero section.
-                  </p>
-                </div>
+              </div>
+            </SectionCard>
+
+            <SectionCard
+              icon={<ImageIcon className="h-5 w-5 text-primary" />}
+              title="Photos of us"
+              description="Share happy snapshots together."
+              controls={
+                <Switch
+                  checked={form.showPhotosOfUs}
+                  onCheckedChange={(checked) =>
+                    updateField("showPhotosOfUs", checked)
+                  }
+                />
+              }
+            >
+              <div className="space-y-1.5">
+                <Label htmlFor="photos-us">Image URLs (one per line)</Label>
+                <Textarea
+                  id="photos-us"
+                  rows={3}
+                  value={form.photosOfUs}
+                  onChange={(event) =>
+                    updateField("photosOfUs", event.target.value)
+                  }
+                />
+                <p className="text-sm text-muted-foreground">
+                  Use hosted image links. We&apos;ll format them beautifully on
+                  the page.
+                </p>
               </div>
             </SectionCard>
 
@@ -518,6 +532,32 @@ export default function CreatePage() {
                   value={form.youtubeLink}
                   onChange={(event) =>
                     updateField("youtubeLink", event.target.value)
+                  }
+                />
+              </div>
+            </SectionCard>
+
+            <SectionCard
+              icon={<GalleryHorizontalEnd className="h-5 w-5 text-primary" />}
+              title="Photos of you"
+              description="Solo shots that make them grin."
+              controls={
+                <Switch
+                  checked={form.showPhotosOfYou}
+                  onCheckedChange={(checked) =>
+                    updateField("showPhotosOfYou", checked)
+                  }
+                />
+              }
+            >
+              <div className="space-y-1.5">
+                <Label htmlFor="photos-you">Image URLs (one per line)</Label>
+                <Textarea
+                  id="photos-you"
+                  rows={3}
+                  value={form.photosOfYou}
+                  onChange={(event) =>
+                    updateField("photosOfYou", event.target.value)
                   }
                 />
               </div>
@@ -590,62 +630,6 @@ export default function CreatePage() {
                   value={form.handwrittenMessage}
                   onChange={(event) =>
                     updateField("handwrittenMessage", event.target.value)
-                  }
-                />
-              </div>
-            </SectionCard>
-
-            <SectionCard
-              icon={<ImageIcon className="h-5 w-5 text-primary" />}
-              title="Photos of us"
-              description="Share happy snapshots together."
-              controls={
-                <Switch
-                  checked={form.showPhotosOfUs}
-                  onCheckedChange={(checked) =>
-                    updateField("showPhotosOfUs", checked)
-                  }
-                />
-              }
-            >
-              <div className="space-y-1.5">
-                <Label htmlFor="photos-us">Image URLs (one per line)</Label>
-                <Textarea
-                  id="photos-us"
-                  rows={3}
-                  value={form.photosOfUs}
-                  onChange={(event) =>
-                    updateField("photosOfUs", event.target.value)
-                  }
-                />
-                <p className="text-sm text-muted-foreground">
-                  Use hosted image links. We&apos;ll format them beautifully on
-                  the page.
-                </p>
-              </div>
-            </SectionCard>
-
-            <SectionCard
-              icon={<GalleryHorizontalEnd className="h-5 w-5 text-primary" />}
-              title="Photos of you"
-              description="Solo shots that make them grin."
-              controls={
-                <Switch
-                  checked={form.showPhotosOfYou}
-                  onCheckedChange={(checked) =>
-                    updateField("showPhotosOfYou", checked)
-                  }
-                />
-              }
-            >
-              <div className="space-y-1.5">
-                <Label htmlFor="photos-you">Image URLs (one per line)</Label>
-                <Textarea
-                  id="photos-you"
-                  rows={3}
-                  value={form.photosOfYou}
-                  onChange={(event) =>
-                    updateField("photosOfYou", event.target.value)
                   }
                 />
               </div>
@@ -759,7 +743,6 @@ function PreviewPanel({
   photosOfUs,
   photosOfYou,
   previewLink,
-  scrollAreaClassName = "h-[600px]",
   className,
 }: PreviewPanelProps) {
   return (
@@ -780,10 +763,7 @@ function PreviewPanel({
       </CardHeader>
       <CardContent>
         <ScrollArea
-          className={cn(
-            "h-full rounded-2xl border border-border/60 p-6",
-            scrollAreaClassName
-          )}
+          className={cn("h-full rounded-2xl border border-border/60 p-6")}
         >
           <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -799,16 +779,35 @@ function PreviewPanel({
                 className="space-y-3 rounded-2xl bg-background/80 p-6 shadow-sm"
                 style={{ border: `1px solid ${accentBorder}` }}
               >
-                {form.recipientName && (
-                  <p
-                    className="text-sm uppercase tracking-[0.2em]"
-                    style={{ color: accentBorder }}
-                  >
-                    For {form.recipientName}
-                  </p>
-                )}
                 <h2 className="text-3xl font-semibold">{form.title}</h2>
                 <p className="text-muted-foreground">{form.message}</p>
+              </section>
+            )}
+
+            {form.showPhotosOfUs && photosOfUs.length > 0 && (
+              <section className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <ImageIcon
+                    className="h-4 w-4"
+                    style={{ color: accentBorder }}
+                  />
+                  Photos of us
+                </div>
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+                  {photosOfUs.map((src, index) => (
+                    <div
+                      key={src + index}
+                      className="overflow-hidden rounded-xl bg-muted"
+                      style={{ border: `1px solid rgba(15,15,15,0.05)` }}
+                    >
+                      <img
+                        src={src}
+                        alt={`Us ${index + 1}`}
+                        className="h-32 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
               </section>
             )}
 
@@ -883,6 +882,32 @@ function PreviewPanel({
               </section>
             )}
 
+            {form.showPhotosOfYou && photosOfYou.length > 0 && (
+              <section className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <GalleryHorizontalEnd
+                    className="h-4 w-4"
+                    style={{ color: accentBorder }}
+                  />
+                  Photos of you
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {photosOfYou.map((src, index) => (
+                    <div
+                      key={src + index}
+                      className="overflow-hidden rounded-xl"
+                    >
+                      <img
+                        src={src}
+                        alt={`You ${index + 1}`}
+                        className="h-32 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             {form.showReasons && (
               <section className="space-y-3">
                 <div
@@ -918,59 +943,6 @@ function PreviewPanel({
                 <p className="text-lg italic leading-relaxed text-muted-foreground">
                   “{form.handwrittenMessage}”
                 </p>
-              </section>
-            )}
-
-            {form.showPhotosOfUs && photosOfUs.length > 0 && (
-              <section className="space-y-3">
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <ImageIcon
-                    className="h-4 w-4"
-                    style={{ color: accentBorder }}
-                  />
-                  Photos of us
-                </div>
-                <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-                  {photosOfUs.map((src, index) => (
-                    <div
-                      key={src + index}
-                      className="overflow-hidden rounded-xl bg-muted"
-                      style={{ border: `1px solid rgba(15,15,15,0.05)` }}
-                    >
-                      <img
-                        src={src}
-                        alt={`Us ${index + 1}`}
-                        className="h-32 w-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {form.showPhotosOfYou && photosOfYou.length > 0 && (
-              <section className="space-y-3">
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <GalleryHorizontalEnd
-                    className="h-4 w-4"
-                    style={{ color: accentBorder }}
-                  />
-                  Photos of you
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {photosOfYou.map((src, index) => (
-                    <div
-                      key={src + index}
-                      className="overflow-hidden rounded-xl"
-                    >
-                      <img
-                        src={src}
-                        alt={`You ${index + 1}`}
-                        className="h-32 w-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
               </section>
             )}
 
